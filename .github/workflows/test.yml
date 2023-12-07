@@ -38,4 +38,4 @@ jobs:
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./app/backend/coverage/pytest-coverage.txt
-          junitxml-path: ./app/backend/coverage/pytest.xml
+          pytest-xml-coverage-path: ./app/backend/coverage/pytest.xml
