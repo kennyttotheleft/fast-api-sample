@@ -33,14 +33,14 @@ jobs:
       - name: Run Pytest
         run: |
           cd app/backend
-          poetry run pytest --junit-xml coverage/pytest.xml
+          poetry run pytest --cov --cov-branch --cov-report=xml
         continue-on-error: true
 
       - name: Upload Test Coverage
         uses: actions/upload-artifact@v3
         with:
           name: test_coverage
-          path: app/backend/coverage/*.xml
+          path: app/backend/coverage.xml
 
       - name: Download Test Coverage
         uses: actions/download-artifact@v3
