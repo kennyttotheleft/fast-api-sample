@@ -33,24 +33,12 @@ jobs:
       - name: Run Pytest
         run: |
           cd app/backend
-          poetry run pytest --cov --cov-branch --junit-xml coverage/pytest.xml
+          set -o pipefail
+          poetry run pytest --junitxml=coverage/pytest.xml --cov-report=term-missing --cov=backend --cov-branch tests/ | tee pytest-coverage.txt
         continue-on-error: true
 
-      - name: Upload Test Coverage
-        uses: actions/upload-artifact@v3
+     - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
         with:
-          name: test_coverage
-          path: app/backend/coverage/*.xml
-
-      - name: Download Test Coverage
-        uses: actions/download-artifact@v3
-        with:
-          name: test_coverage
-          path: artifacts
-
-      - name: Display Test Coverage
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: |
-            artifacts/**/*.xml
+          pytest-coverage-path: ./app/backend/coverage/pytest-coverage.txt
+          junitxml-path: ./app/backend/coverage/pytest.xml
