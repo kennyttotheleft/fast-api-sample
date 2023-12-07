@@ -15,8 +15,8 @@ RUN pip install "poetry==$POETRY_VERSION"
 COPY ["./app/backend/pyproject.toml", "./app/backend/poetry.lock", "/app/backend/"]
 RUN poetry config virtualenvs.in-project true && \
     poetry config virtualenvs.create false &&\
-    poetry install --only=main --no-root
+    poetry install
 
 EXPOSE 8000
 
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "backend.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
