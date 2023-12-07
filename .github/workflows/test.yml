@@ -1,5 +1,9 @@
 name: pytest
 
+permissions:
+  checks: write
+  pull-requests: write
+
 on:
   pull_request
 
@@ -45,6 +49,8 @@ jobs:
           path: artifacts
 
       - name: Display Test Coverage
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
         with:
-          files: artifacts/**/*.xml
+          files: |
+            artifacts/**/*.xml
