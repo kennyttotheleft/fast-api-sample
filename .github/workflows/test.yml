@@ -5,7 +5,7 @@ permissions:
   pull-requests: write
 
 on:
-  pull_request
+  pull_request:
 
 jobs:
   pytest:
@@ -34,7 +34,7 @@ jobs:
         run: poetry run pytest --junitxml=coverage/pytest.xml --cov-report=term-missing --cov=backend --cov-branch tests/ | tee pytest-coverage.txt
         continue-on-error: true
 
-     - name: Pytest coverage comment
+      - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./app/backend/coverage/pytest-coverage.txt
