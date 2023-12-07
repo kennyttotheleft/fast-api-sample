@@ -32,9 +32,8 @@ jobs:
 
       - name: Run Pytest
         run: |
-          ls
           cd app/backend
-          poetry run pytest test --junit-xml coverage/pytest.xml
+          poetry run pytest --junit-xml coverage/pytest.xml
         continue-on-error: true
 
       - name: Upload Test Coverage
