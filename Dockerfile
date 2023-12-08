@@ -3,7 +3,7 @@ ENV PYTHONFAULTHANDLER=1 \
     PYTHONHASHSEED=random \
     PYTHONUNBUFFERED=1
 
-WORKDIR /app/backend
+WORKDIR /app
 
 FROM base as builder
 ENV PIP_DEFAULT_TIMEOUT=100 \
@@ -12,7 +12,7 @@ ENV PIP_DEFAULT_TIMEOUT=100 \
     POETRY_VERSION=1.7.1
 RUN pip install "poetry==$POETRY_VERSION"
 
-COPY ["./app/backend/pyproject.toml", "./app/backend/poetry.lock", "/app/backend/"]
+COPY ["./app/pyproject.toml", "./app/poetry.lock", "/app/"]
 RUN poetry config virtualenvs.in-project true && \
     poetry config virtualenvs.create false &&\
     poetry install

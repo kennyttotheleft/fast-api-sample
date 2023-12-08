@@ -26,18 +26,18 @@ jobs:
           version: 1.7.1
 
       - name: Install Dependencies
-        working-directory: app/backend
+        working-directory: app
         run: poetry install --no-interaction
 
       - name: Run Pytest
-        working-directory: app/backend
-        run: poetry run pytest --junitxml=coverage/pytest.xml --cov-report=term-missing --cov=backend --cov-branch tests/ | tee pytest-coverage.txt
+        working-directory: app
+        run: poetry run pytest --junitxml=coverage/pytest.xml --cov-report=term-missing --cov=app --cov-branch tests/ | tee pytest-coverage.txt
         continue-on-error: true
 
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
-          pytest-coverage-path: ./app/backend/coverage/pytest-coverage.txt
-          junitxml-path: ./app/backend/coverage/pytest.xml
+          pytest-coverage-path: ./app/coverage/pytest-coverage.txt
+          junitxml-path: ./app/coverage/pytest.xml
           hide-badge: false
           hide-report: false
